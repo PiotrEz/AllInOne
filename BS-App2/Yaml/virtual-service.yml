@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: app2
+  namespace: default
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - default-gateway
+  http:
+  - name: app2
+    match:
+    - uri:
+        prefix: /app2
+    route:
+    - destination:
+        host: app2.default.svc.cluster.local
+        port:
+          number: 4000

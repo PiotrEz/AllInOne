@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbit
+  namespace: default
+  labels:
+    app: rabbitmq
+spec:
+  selector:
+    matchLabels:
+      app: rabbitmq
+  replicas: 1
+  template:
+    metadata:
+      name: rabbitmq
+      labels:
+        app: rabbitmq
+        type: queue
+    spec:
+      containers:
+        - name: rabbitmq-container
+          image: piotruz/rabbit:latest
+          ports:
+            - containerPort: 15672
